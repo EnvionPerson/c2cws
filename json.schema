@@ -103,7 +103,8 @@
                                 "type": "array",
                                 "items": { "type": "integer"}
                             }
-                        }
+                        },
+                        "required": ["name", "objectTargetAction"]
                     }
                 },
                 "fieldRules": {
