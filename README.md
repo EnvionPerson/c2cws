@@ -25,10 +25,10 @@
 ```json
 "defaultRules":{
     "skuRules":{
-        "objectRules": [
+        "objectRules": [{
             "name": "AAXX",
             "objectTargetAction": "live"
-        ],
+        }],
         "objectTargetAction":"compare"
         }
 }
@@ -41,6 +41,7 @@ use cases:
 ```javascript
 "defaultRules":{  
     "skuRules":{
+        <!-- IGNORE BLOCK-->
         "fieldRules": [{
             "coreFieldName": "test",
             "objectTargetAction": "compare"
@@ -48,7 +49,8 @@ use cases:
         "objectRules": [{
             "name": "AAXX",
             "objectTargetAction": "compare"
-        }], <!-- IGNORE -->
+        }],
+        <!-- IGNORE -->
         "objectTargetAction":"live"
     }
 }
