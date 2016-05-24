@@ -12,7 +12,9 @@
 - **ignore**: does nothing.
 
 ##examples:
-`"defaultRules":{ "skuRules":{"objectTargetAction":"compare"}}`
+```json
+"defaultRules":{ "skuRules":{"objectTargetAction":"compare"}}
+```
 
 # anchorActionOnChange
 - **flag**
@@ -20,8 +22,8 @@
 
 # Apply default rules
 ## compare with object rules
-
-`"defaultRules":{
+```json
+"defaultRules":{
     "skuRules":{
         "objectRules": [
             "name": "AAXX",
@@ -29,14 +31,14 @@
         ],
         "objectTargetAction":"compare"
         }
-}`
-
+}
+```
 in this example: all products will compare with live products, but
 product with name "AAXX" directly to live table(SKUS)
 
 use cases:
 - if *skuRules* have *objectTargetAction* one of  (**live**, **force**, **retrospective**, **ignore**) then *objectRules* and *fieldRules* will *ignore*  
-```json
+```javascript
 "defaultRules":{  
     "skuRules":{
         "fieldRules": [{
