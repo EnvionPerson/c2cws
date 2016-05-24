@@ -97,3 +97,17 @@ use cases:
 - **remove**: Remove set B from set A (database field values) i.e: remove setB{1,2} from setA{1,2,4,5} => setA{4,5}
 - **append**: Append set B to set A (database field values) and ignore duplicates. i.e: append setB{1,2} from setA{2,3,4} => setA{1,2,3,4}
 - **replace**: Replace set B on set A (database field values) with set i.e: replace setA{1,2} on setB{3,4}  => setA{3,4}
+
+# Apply Product Link Rules (skuLinkRules)
+
+```json
+ "product": {
+     "skuLinkRules": {
+         "anchorLinkRules": [1,2,3],
+         "parentChildLinkRules": [1,2,4]
+     }
+ }
+```
+## Definition
+- **anchorLinkRules**: get rule from table 'anchor_rule' and apply to current product( or item)
+- **parentChildLinkRules**: get rule from table 'sku_links_rule' and apply(*link*) to another product
