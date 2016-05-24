@@ -2,7 +2,7 @@
 # Description of the Properties
 
 # objectTargetAction
-- **compare**:
+- **compare**: compare all fields and objectRules and fieldRules have top priority
 - **live**: directly to Table (without placing in Comparison);
 - **force**: places it in Comparison Directly (even without real comparison between DB's version)
 - **retrospective**: takes value from Live (real ) Table value puts in Comparison
@@ -13,7 +13,11 @@
 
 ##examples:
 ```json
-"defaultRules":{ "skuRules":{"objectTargetAction":"compare"}}
+    "defaultRules":{
+        "skuRules":{
+            "objectTargetAction":"compare"
+            }
+        }
 ```
 
 # anchorActionOnChange
@@ -56,3 +60,21 @@ use cases:
 }
 ```
 - if *skuRules* have *objectTargetAction* **compare** then *fieldRules* have **top priority**, next priority *objectRules* and bottom *skuRules*  
+```javascript
+"defaultRules":{  
+    "skuRules":{
+        <!-- TOP PRIORITY BLOCK-->
+        "fieldRules": [{
+            "coreFieldName": "test",
+            "objectTargetAction": "live"
+        }],
+        <!-- LOWER -->
+        "objectRules": [{
+            "name": "AAXX",
+            "objectTargetAction": "force"
+        }],
+        <!-- LOWEST -->
+        "objectTargetAction":"compare"
+    }
+}
+```
