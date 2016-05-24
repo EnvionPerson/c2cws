@@ -1,7 +1,7 @@
 # CEG to Core WebServices (C2CWS)
 # Description of the Properties
 
-# objectTargetAction
+## objectTargetAction
 - **compare**: compare all fields and objectRules and fieldRules have top priority
 - **live**: directly to Table (without placing in Comparison);
 - **force**: places it in Comparison Directly (even without real comparison between DB's version)
@@ -20,7 +20,7 @@
         }
 ```
 
-# anchorActionOnChange
+## anchorActionOnChange
 - **flag**
 - **no_flag**
 
