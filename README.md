@@ -36,17 +36,19 @@ product with name "AAXX" directly to live table(SKUS)
 
 use cases:
 - if *skuRules* have *objectTargetAction* one of  (**live**, **force**, **retrospective**, **ignore**) then *objectRules* and *fieldRules* will *ignore*  
-`"defaultRules":{`  
-&ensp;`"skuRules":{`  
-&ensp;&ensp;`"fieldRules": [
+```json
+"defaultRules":{  
+    "skuRules":{
+        "fieldRules": [{
             "coreFieldName": "test",
             "objectTargetAction": "compare"
-        ],
-        "objectRules": [
+        }],
+        "objectRules": [{
             "name": "AAXX",
             "objectTargetAction": "compare"
-        ], <!-- IGNORE -->`  
-`        "objectTargetAction":"live"
-        }
-}`  
+        }], <!-- IGNORE -->
+        "objectTargetAction":"live"
+    }
+}
+```
 - if *skuRules* have *objectTargetAction* **compare** then *fieldRules* have **top priority**, next priority *objectRules* and bottom *skuRules*  
