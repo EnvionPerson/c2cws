@@ -9,7 +9,7 @@
     when new value will be placed in Live Table. So at the result you will have;
     Live : value = new from Feed
     Comparison: value = old value from Live.
-- **ignore**: does nothing.
+- **ignore**: does nothing. (applying link rules and multiSelect rules )
 
 ##examples:
 ```json
@@ -78,3 +78,22 @@ use cases:
     }
 }
 ```
+## Multi-Select
+
+```javascript
+"defaultRules":{  
+    "skuRules":{
+        "multiSelect":{
+            <!-- uses as default if column name not specify -->
+            "default": {oneOf:["append", "remove", "replace"]},
+            <!-- concrete column specification top priority on default--> 
+            "columnName": "remove"
+        }
+    }
+}
+```
+
+### Actions
+- **remove**: Remove set B from set A (database field values) i.e: remove setB{1,2} from setA{1,2,4,5} => setA{4,5}
+- **append**: Append set B to set A (database field values) and ignore duplicates. i.e: append setB{1,2} from setA{2,3,4} => setA{1,2,3,4}
+- **replace**: Replace set B on set A (database field values) with set i.e: replace setA{1,2} on setB{3,4}  => setA{3,4}
