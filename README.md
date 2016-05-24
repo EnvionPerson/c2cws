@@ -35,5 +35,5 @@ in this example: all products will compare with live products, but
 product with name "AAXX" directly to live table(SKUS)
 
 use cases:
-if *skuRules* have *objectTargetAction* one of  (**live**, **force**, **retrospective**, **ignore**) then *objectRules* and *fieldRules* will *ignore*
-if *skuRules* have *objectTargetAction* **compare** then *fieldRules* have **top priority**, next priority *objectRules* and bottom *skuRules*
+- if *skuRules* have *objectTargetAction* one of  (**live**, **force**, **retrospective**, **ignore**) then *objectRules* and *fieldRules* will *ignore*
+- if *skuRules* have *objectTargetAction* **compare** then *fieldRules* have **top priority**, next priority *objectRules* and bottom *skuRules*
