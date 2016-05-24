@@ -1,4 +1,4 @@
-# c2cw
+# CEG to Core WebServices (C2CWS)
 # Description of the Properties
 
 # objectTargetAction
@@ -86,7 +86,7 @@ use cases:
         "multiSelect":{
             <!-- uses as default if column name not specify -->
             "default": {oneOf:["append", "remove", "replace"]},
-            <!-- concrete column specification top priority on default--> 
+            <!-- concrete column specification top priority on default-->
             "columnName": "remove"
         }
     }
