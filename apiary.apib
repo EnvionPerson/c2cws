@@ -1,80 +1,410 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://server.aouk.co.uk/c2c/production/v1
 
 # CEG to Core API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+C2C is a simple API allowing import Products.
 
-## Questions Collection [/questions]
+# Import Products to Core [/products]
 
-### List All Questions [GET]
+Allowing import many products to AO Core System
 
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+## Import Products [POST]
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+            "target": 1,
+            "products": [{
+                "product": {
+                    "aoidCode" : "AA000001",
+                    "fields" : {
+                        "ID" : "18447",
+                        "ShipID" : 1,
+                        "ShipName" : "Explorer Of The Seas (ShipName)",
+                        "Language" : "en",
+                        "Gross Tonnage" : "138,000",
+                        "Length" : "1,025 ft",
+                        "Draft" : "29 ft",
+                        "Cruising Speed" : "22 knots",
+                        "Occupancy" : "3,114 double occupancy, 3,807 maximum",
+                        "Max Beam" : "157.5 feet",
+                        "Electric Current" : "110/220 VAC/1500 watts",
+                        "Ship's Registry" : "Bahamas  (note Registry seems to be the same)",
+                        "Entered Service" : "November 18, 2001",
+                        "Last Refurbished" : "April,  2009",
+                        "Rock-climbing wall" : true,
+                        "Ice-skating rink" : true,
+                        "Mini-golf course" : true,
+                        "Basketball court" : true,
+                        "Jogging and In-line skating tracks" : true,
+                        "In-line skating track" : true,
+                        "Golf simulator" : "",
+                        "Officers" : "Italian",
+                        "Crew" : "International"
+                    },
+                    "skuLinkRules" : {
+                        "anchorLinkRules" : [12, 72, 14, 989],
+                        "parentChildLinkRules" : [30, 24, 67, 4574]
                     }
-                ]
+                },
+                "copy":[{
+                    "chainPosition" : 0,
+                    "name": "Ship Facts",
+                    "fields" : {
+                        "Title" : "Ship Facts",
+                        "Content" : "<ul>\n<li><b>Gross Tonnage:</b> 138,000</li>\n<li><b>Length:</b> 1,025 ft</li>\n<li><b>Max Beam:</b> 157.5 ft</li>\n<li><b>Draft:</b> 29 ft</li>\n<li><b>Cruising Speed:</b> 22 knots</li>\n</ul>",
+                        "Language" : "en",
+                        "Format" : "bold, italic",
+                        "Styled" : "html",
+                        "Comments" : "",
+                        "Category" : "",
+                        "Type" : 0
+                    }
+                }],
+                "prices":[{
+                    "name":"test.price",
+                    "fields":{
+                        "Price":"10.50"
+                    }
+                }],
+                "pictures":[{
+                    "name":"test-image.jpg",
+                    "fields":{
+                        "Language":"English"
+                    }
+                }],
+                "logos":[],
+                "movies":[],
+                "sounds":[]
+            }],
+            "defaultRules":{
+                "skuRules":{
+                    "objectRules":[],
+                    "fieldRules":[],
+                    "objectTargetAction":"compare",
+                    "anchorActionOnChange":"flag",
+                    "multiSelect": {
+                    }
+                },
+                "copyRules":{
+                    "objectRules":[{
+                        "name":"test-copy_name",
+                        "objectTargetAction":"live",
+                        "anchorActionOnChange":"flag",
+                        "anchorLinkRules":[1,2,6]
+                    }],
+                    "fieldRules":[] 
+                },
+                "priceRules":{
+                    "objectRules":[],
+                    "fieldRules":[],
+                    "objectTargetAction":"compare"
+                },
+                "pictureRules":{
+                    "objectRules":[],
+                    "fieldRules":[],
+                    "objectTargetAction":"compare"
+                },
+                "logoRules":{},
+                "movieRules":{},
+                "soundRules":{}
             }
+        }
+        
+
++ Response 200 (application/json)
+
+        {
+            "AA00001": "OK"
+        }
+        
+# Product [/product/{sku_num}]
+
+Retrive All Product Data
+
++ Parameters
+    + sku_num (required, string, `AA000002`) ... Product ID
+
+## View a Product Detail [GET]
+
++ Response 200 (application/json)
+
+        {
+            "product":{
+                "name":"AA000002",
+                "fields":{
+                    "Product ID":"AA000002",
+                    "Comments":"",
+                    "Department":"Hotel",
+                    "Description":"eO=1=MA ==house-The Zurich All Suite Hotel",
+                    "User":"core","Mod. Date":1425379702000,
+                    "Vendor":"",
+                    "Geo Latitude":"47.383782",
+                    "Street Building Name Number":"Nordstrasse 1",
+                    "QB Rating":"",
+                    "Management Company":"Bau und Liegenschaften AG",
+                    "Non Smoking":"Some","On Sale":true,"Shopping Mall":"Near By",
+                    "Multilingual Staff":true,"Minibar":"All","Fare Type":"","End Location":"",
+                    "City":"Zurich","Valid To":"","Air Conditioning":"All","Laundry Room":true,"QB Rating Method":"",
+                    "Country":"Switzerland","Family Policy":"","Carrier Code":"","Telephone Message":"All",
+                    "Telephone in room":"All","Arrival Time":"","Chain Name":"","Parking":true,"Number of Rooms":"22",
+                    "Television":"All","Valid From":"","Active":false,"Departure Time":"","Tea Coffee Making Facilities":"All",
+                    "Microwave":"Some","Distance to Shopping":"","Newspaper":"All","ZIP Post Code":"8007","Priority":"",
+                    "Country ISO Code 2":"CH","Number of Floors":"7","Crib Rollaway":true,"Internet Cable Fee":true,"Renovations Current":"",
+                    "Departure Gateway Name":"","Child Ages":"","Refrigerator":"All","Checkin Time":"1500","Staff Comment":"","State URL":"",
+                    "Local Currency":"X","Day Spa":"Near By","IH Rating Method":"","Year Built":"1996","Checkout Time":"1100",
+                    "Car Rental Desk":true,"Internet Wireless Fee":true,"Origin":"","Operation Days":"","ACCC Signee":"",
+                    "Country Group":"Europe","Year Renovated":"","Location":"","IH Preferred Hotel":true,"Departure Gateway Code":"",
+                    "Cancellation Policy":"","Casino":"Near By","Golf":"Near By","Concierge":true,"Kitchenette":"Some",
+                    "Surveillance Camera":true,"Internet Wireless":true,"Internet Cable":true,"Laundry Service":true,
+                    "City Code":"ZRH","Start Location":"","Flight Number":"","Cable TV":"All","Daily Maid":"All",
+                    "Iron and Ironing Board":"All","Renovations Completed":"","Electric Key":true,"Geo Longitude":"8.540492",
+                    "Sub Region URL":"","State":"","In room safe":"All","Honeymoon Policy":"","Boats":"Near By",
+                    "VCR":"All","Carrier Name":"","Smoke Alarm":true,"Region":"","Parking Cost":true,"All Suite":true,
+                    "City Location":"In","Nearest Cross Street":"Stampfenbachstrasse","Internet Common":true,
+                    "Internet Common Fee":true,"Internet Common Wireless":true,"Internet Common Wireless Fee":true,
+                    "Complimentary Coffee":true,"Product Sub Category":"","Destination":"","Suburb":"","Suburb Code":"",
+                    "Suburb URL":"","Sub Region":"","Sub Region Code":"","Parent Sub Region Code":"",
+                    "Parent Sub Region URL":"","Region Code":"","Country URL":"","Region URL":"",
+                    "Northstar ID":"T14823","Infinity ID":"H-ZRH-EMA","GTA ID":"ZRH-EMA, ","Currency":"",
+                    "AW Rating Method":"","GTA Rating Method":"0","Toppick":"","Product URL":"",
+                    "Product Category":"Accommodation","Address1":"","Address2":"","Address3":"",
+                    "Address4":"","State Code":"","Country ISO Code 3":"CHE","FC Rating":"",
+                    "Airport Distance 2":"","Direct Marketing Email":"test@mail.com",
+                    "Airport Distance 1":"15","Admin Services":true,"Photocopy Service":true,
+                    "Sales Director Email":"","Area Fax Code":"44","Management Facility":true,
+                    "Fax":"368-3636","Area Phone Code":"44","Airport Code 2":"",
+                    "Airport Code 1":"ZRH","POI Distance 3":"1.4","Departure Tax":"",
+                    "General Manager Name":"Urs Schaerer","Toll Free":"",
+                    "Restaurant Type 2":"Restaurant","Restaurant Type 1":"Restaurant","Group URL":"",
+                    "POI Distance Unit 1":"Kilometre","Pets Allowed":true,"POI Distance Unit 3":"Kilometre",
+                    "POI Distance 1":".5","POI Distance Unit 2":"Kilometre","POI Distance 2":"0.9","End Time 2":"",
+                    "AV Rental":true,"End Time 1":"","Sales Director Title":"","Country Phone Code":"41",
+                    "POI Name 1":"Swiss National Museum","POI Name 2":"Bahnhofstrasse","POI Name 3":"Paradeplatz",
+                    "Direct Marketing Name":"","Restaurant Name 2":"Drei Stuben","Chain Toll Free":"",
+                    "Restaurant Name 3":"","Restaurant Name 1":"White Elephant","Airport Drive Time 2":"",
+                    "Airport Drive Time 1":"10 min","Start Time 1":"","Start Time 2":"",
+                    "General Manager Title":"Gen Mgr","Nearest City Distance":"","General Manager Email":"",
+                    "Inclusions":"","Fax Available":true,"Nearest City":"","Pet Fee":true,"Restaurant Description 3":"",
+                    "Airport Name 1":"Zurich","Airport Name 2":"","POI Description 2":"Main shopping area",
+                    "POI Description 3":"Bank/business center","Fare Rules":"","Airport Direction 1":"N",
+                    "Direct Marketing Title":"","Restaurant Description 1":"Thai Food (Marriott Hotel, across teh EMA house",
+                    "Product Email":"","Restaurant Description 2":"Swiss Food, fair value","Airport Status 2":"",
+                    "Airport Status 1":"A","Sales Director Name":"","Area Toll Free Code":"","Phone":"368-3668",
+                    "Airport Near":"","POI Description 1":"Museum","POI Direction 1":"S","POI Direction 2":"S",
+                    "POI Direction 3":"S","Chain URL":"","Pickup City":"",
+                    "Drop Off City":""
+                },
+                "aoidCode":null,
+                "productType":null,
+                "skuLinkRules":null
+            },
+            "copy":[{
+                "name":"IH.bonus",
+                "fields":{
+                    "Comments":"rr",
+                    "Copy Name":"IH.bonus",
+                    "Copy Text":"rrr",
+                    "Mod. Date":1422464369000,
+                    "User":"Angela",
+                    "Language":1,
+                    "Header":"",
+                    "Day":"",
+                    "Overnight":"",
+                    "Page Ref":""
+                },
+                "chainPosition":null
+            }],
+            "prices":[{
+                "name":"IH.2A-1",
+                "fields":{
+                    "Price Format":0,"Type":"a Junior Suite (No Kitchen)","User":"core",
+                    "Mod. Date":1425379702000,"Price Name":"IH.2A-1",
+                    "Show Prices":true,"Validity":"",
+                    "Sales From Date":"2013-01-18",
+                    "Comments":"CEMAK",
+                    "Inactive":false,
+                    "Sales To Date":"2013-04-18",
+                    "Travel To Date":"31/12/12",
+                    "Price":179.00,
+                    "Travel From Date":"8/11/12"
+                }},{
+                "name":"IH.2A-2",
+                "fields":{
+                    "Price Format":0,"Type":"a Junior Suite (no kitchen)","User":"core",
+                    "Mod. Date":1425379702000,"Price Name":"IH.2A-2","Show Prices":true,"Validity":"",
+                    "Sales From Date":"2013-01-18","Comments":"CEMAM","Inactive":false,
+                    "Sales To Date":"2013-04-18","Travel To Date":"31/12/13","Price":185.00,
+                    "Travel From Date":"1/01/13"
+                }},{
+                "name":"IH.2A-3",
+                "fields":{
+                    "Price Format":3,"Type":"a 1 Bedroom Executive Apt","User":"core","Night":"",
+                    "Mod. Date":1425379702000,"Price Name":"IH.2A-3",
+                    "Show Prices":true,"Validity":"","Sales From Date":"2013-01-18",
+                    "Comments":"CEMAL","Occupancy":"56","Inactive":false,
+                    "Sales To Date":"2013-04-18",
+                    "Travel To Date":"31/12/13","Price":279.00,"Travel From Date":"1/01/13","Meal Plan":""
+                }},{
+                "name":"IH.2A-4",
+                "fields":{
+                    "Price Format":0,"Type":"a 1 Bedroom Senior Apartment",
+                    "User":"core","Mod. Date":1425379702000,"Price Name":"IH.2A-4",
+                    "Show Prices":true,"Validity":"","Sales From Date":"2013-01-18",
+                    "Comments":"CEMAG","Inactive":false,"Sales To Date":"2013-04-18",
+                    "Travel To Date":"31/12/12","Price":285.00,"Travel From Date":"8/11/12"
+                }},{
+                "name":"Tets-name",
+                "fields":{
+                    "Price Format":4,"Type":"","User":"Angela","Night":"","Mod. Date":1422464343000,
+                    "Pax":"1A","Price Name":"Tets-name","Validity":"","Comments":"",
+                    "Occupancy":"","Travel To Date":"","Price":25.00,"Travel From Date":"","Meal Plan":""
+                }}
+            ],
+            "pictures":[{
+                "name":"EMA_House_Zurich_P.jpg",
+                "fields":{
+                    "Comments":"","File Name":"EMA_House_Zurich_P.jpg","High Res. Path":"",
+                    "Low Res. Path":"","Status":"Ready","Image Name":"EMA_House_Zurich_P",
+                    "Mod. Date":1425379702000,"Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/3/0/38/39/755/EMA_House_Zurich_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/3/0/38/39/755/EMA_House_Zurich_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM","Image Size":"21032","Image Height":"320","Image Width":"480","Caption":"",
+                    "Copyright":""
+                }},{
+                "name":"H2BGRL05_P.jpg",
+                "fields":{
+                    "Comments":"","File Name":"H2BGRL05_P.jpg",
+                    "High Res. Path":"","Low Res. Path":"","Status":"Ready",
+                    "Image Name":"H2BGRL05_P","Mod. Date":1425379702000,
+                    "Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/582/H2BGRL05_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/582/H2BGRL05_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM","Image Size":"23326","Image Height":"225",
+                    "Image Width":"300","Caption":"","Copyright":""
+                }},{
+                "name":"H2BGRL01_P.jpg",
+                "fields":{
+                    "Comments":"","File Name":"H2BGRL01_P.jpg","High Res. Path":"","Low Res. Path":"","Status":"Ready",
+                    "Image Name":"H2BGRL01_P","Mod. Date":1425379702000,"Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/586/H2BGRL01_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/586/H2BGRL01_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM","Image Size":"25005","Image Height":"359","Image Width":"480","Caption":"",
+                    "Copyright":""
+                }},{
+                "name":"H2BGRL0G_P.jpg",
+                "fields":{
+                    "Comments":"","File Name":"H2BGRL0G_P.jpg","High Res. Path":"","Low Res. Path":"",
+                    "Status":"Ready","Image Name":"H2BGRL0G_P","Mod. Date":1425379702000,
+                    "Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/590/H2BGRL0G_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/590/H2BGRL0G_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM","Image Size":"17362","Image Height":"269","Image Width":"400","Caption":"",
+                    "Copyright":""
+                }},{
+                "name":"H2BGRL08_P.jpg",
+                "fields":{
+                    "Comments":"",
+                    "File Name":"H2BGRL08_P.jpg",
+                    "High Res. Path":"",
+                    "Low Res. Path":"",
+                    "Status":"Ready",
+                    "Image Name":"H2BGRL08_P",
+                    "Mod. Date":1425379702000,
+                    "Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/594/H2BGRL08_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/594/H2BGRL08_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM",
+                    "Image Size":"12804",
+                    "Image Height":"203",
+                    "Image Width":"300",
+                    "Caption":"",
+                    "Copyright":""
+                }},{
+                "name":"H2BGRL0D_P.jpg",
+                "fields":{
+                    "Comments":"",
+                    "File Name":"H2BGRL0D_P.jpg",
+                    "High Res. Path":"",
+                    "Low Res. Path":"",
+                    "Status":"Ready",
+                    "Image Name":"H2BGRL0D_P",
+                    "Mod. Date":1422460017000,
+                    "Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/598/H2BGRL0D_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/598/H2BGRL0D_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM",
+                    "Image Size":"13110",
+                    "Image Height":"203",
+                    "Image Width":"300",
+                    "Caption":"",
+                    "Copyright":""
+                }},{
+                "name":"LatestExternal_P.jpg",
+                "fields":{
+                    "Comments":"",
+                    "File Name":"LatestExternal_P.jpg",
+                    "High Res. Path":"",
+                    "Low Res. Path":"",
+                    "Status":"Ready",
+                    "Image Name":"LatestExternal_P",
+                    "Mod. Date":1363551253000,"Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/26/96/177/LatestExternal_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/26/96/177/LatestExternal_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM",
+                    "Image Size":"28382",
+                    "Image Height":"480",
+                    "Image Width":"320","Caption":"",
+                    "Copyright":""
+                }},{
+                "name":"TEST-IMAGE1.jpg",
+                "fields":{
+                    "Comments":"",
+                    "File Name":"TEST-IMAGE1.jpg",
+                    "High Res. Path":"",
+                    "Low Res. Path":"",
+                    "Status":"Ready",
+                    "Image Name":"TEST-IMAGE1.jpg",
+                    "Mod. Date":1425379702000,
+                    "Target Channel":"All",
+                    "Source Info":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/598/H2BGRL0D_J.jpg",
+                    "Image Category":"Accommodation",
+                    "Keywords":"http://www.cfmedia.vfmleonardo.com/imageRepo/1/0/29/556/598/H2BGRL0D_A.jpg||CAT_RANK=1",
+                    "Image Supplier":"VFM",
+                    "Image Size":"13110",
+                    "Image Height":"203",
+                    "Image Width":"300",
+                    "Caption":"",
+                    "Copyright":""
+                }}
+            ],
+            "logos":null,
+            "movies":null,
+            "sounds":null}
+
+# Group Description of the Properties
+
+# objectTargetAction 
+- **compare**: 
+- **live**: directly to Table (without placing in Comparison);
+- **force**: places it in Comparison Directly (even without real comparison between DB's version)
+- **retrospective**: takes value from Live (real ) Table value puts in Comparison
+    when new value will be placed in Live Table. So at the result you will have;
+    Live : value = new from Feed
+    Comparison: value = old value from Live. 
+- **ignore**: does nothing.
+
+##examples:
+`"defaultRules":{ "skuRules":{"objectTargetAction":"compare"}}`
+
+# anchorActionOnChange
+- **flag**
+- **no_flag**
