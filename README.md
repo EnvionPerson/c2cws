@@ -1,5 +1,5 @@
 # CEG to Core WebServices (C2CWS)
-[apiary  Doc](http://docs.cegtocoreapi.apiary.io/#)
+[apiary  Doc](https://cegtocoreapi.docs.apiary.io/#)
 # Description of the Properties
 
 ## objectTargetAction
